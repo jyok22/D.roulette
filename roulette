@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>다린탕전원 · 100% 당첨 룰렛</title>
+<style>
+:root {
+  --sky:#82cce2;
+  --pink:#f1b0bf;
+  --hot:#ed1e5c;
+  --gold:#ffd631;
+  --ink:#624f46;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Pretendard","Noto Sans KR","Malgun Gothic",Arial,sans-serif}
+body{
+  background:linear-gradient(to bottom,var(--sky) 0 42%,var(--pink) 42% 100%);
+  color:#fff;
+}
+.page{width:min(100%,900px);margin:0 auto;min-height:100vh;padding:22px 16px 46px;position:relative;overflow:hidden}
+.hero{text-align:center;position:relative;z-index:2}
+.eyebrow{margin:0;font-size:clamp(28px,6vw,44px);font-weight:900;letter-spacing:-2px}
+.headline{margin:0;font-size:clamp(64px,12vw,94px);line-height:1;font-weight:1000;letter-spacing:-4px}
+.headline .num{color:#5e1e21}
+.headline .win{color:#ee1e5c}
+
+.firework{position:absolute;width:100px;height:100px;opacity:.72}
+.firework:before{
+  content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:#fff;
+  box-shadow:0 -46px 0 1px #fff,0 46px 0 1px #fff,46px 0 0 1px #fff,-46px 0 0 1px #fff,
+  33px -33px 0 1px #fff,-33px -33px 0 1px #fff,33px 33px 0 1px #fff,-33px 33px 0 1px #fff;
+}
+.fw1{left:-15px;top:105px} .fw2{right:-20px;top:80px} .fw3{left:-10px;bottom:180px} .fw4{right:-10px;bottom:155px}
+
+.stage{width:min(88vw,440px);margin:16px auto 18px;position:relative;z-index:3}
+.wheel-shell{
+  position:relative;width:100%;aspect-ratio:1;border-radius:50%;
+  background:var(--gold);padding:14px;
+  box-shadow:0 18px 36px rgba(71,42,43,.24);
+}
+.wheel-frame{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;background:#ec2863;padding:10px}
+#wheelSvg{width:100%;height:100%;display:block;transform-origin:50% 50%;transition:transform 4.8s cubic-bezier(.13,.84,.19,1)}
+.sector{stroke:#ffffff;stroke-opacity:.30;stroke-width:1.5}
+.label{fill:var(--ink);font-weight:900;pointer-events:none}
+.pct{font-size:18px;font-weight:900}
+.name{font-size:16px;font-weight:900}
+
+.pointer{
+  position:absolute;left:50%;top:-2px;transform:translateX(-50%);z-index:10;
+  width:0;height:0;border-left:17px solid transparent;border-right:17px solid transparent;
+  border-top:28px solid #f46a51;filter:drop-shadow(0 5px 4px rgba(0,0,0,.18));
+}
+.pointer:before{
+  content:"";position:absolute;left:-11px;top:-28px;width:22px;height:21px;
+  background:linear-gradient(#ffd83d,#f47d4c);clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%);
+}
+
+.center{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:31%;aspect-ratio:1;border-radius:50%;
+  border:9px solid rgba(255,255,255,.78);
+  background:#ef185b;color:#fff;font-weight:1000;font-size:clamp(17px,4vw,25px);
+  box-shadow:0 0 0 11px rgba(202,191,194,.34),0 8px 18px rgba(80,50,52,.18);
+  z-index:11;cursor:pointer;
+}
+.center:active{transform:translate(-50%,-49%)}
+
+.cta{
+  display:block;width:min(100%,390px);margin:10px auto 0;border:0;border-radius:999px;
+  padding:15px 22px;background:#fff;color:#5e1e21;font-weight:900;font-size:20px;cursor:pointer;
+  box-shadow:0 8px 18px rgba(109,48,58,.17);
+}
+.note{text-align:center;font-size:13px;line-height:1.6;margin:10px auto 0;max-width:520px}
+
+.channel{position:relative;z-index:3;text-align:center;width:min(100%,610px);margin:26px auto 0}
+.channel-pill{width:min(100%,400px);height:46px;border-radius:25px;background:#ffdc00;color:#463100;margin:0 auto 15px;
+ display:flex;align-items:center;justify-content:center;gap:14px;font-weight:900}
+.ch{background:#ffe600;border-radius:12px 12px 12px 3px;padding:7px 12px}
+.guide{font-size:16px;font-weight:700;line-height:1.5}
+.event-box{width:min(100%,390px);margin:16px auto 0;background:#fff;color:#5d4b42;padding:14px 20px;font-size:33px;font-weight:1000}
+.fine{font-size:13px;opacity:.85;margin-top:18px}
+
+.modal{position:fixed;inset:0;background:rgba(28,20,23,.58);display:none;align-items:center;justify-content:center;
+z-index:50;padding:18px;backdrop-filter:blur(5px)}
+.modal.open{display:flex}
+.card{width:min(92vw,420px);background:#fff;border-radius:26px;padding:28px 22px 20px;color:#5e4d45;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.28)}
+.badge{color:#ef1f5b;font-weight:1000;font-size:20px}
+.title{font-size:33px;font-weight:1000;margin:8px 0 5px}
+.prize{font-size:24px;font-weight:900;margin:0 0 7px}
+.sub{font-size:14px;opacity:.72;margin:0 0 20px}
+.ok{width:100%;border:0;border-radius:999px;padding:13px;background:#ef1f5b;color:white;font-weight:900;font-size:17px;cursor:pointer}
+
+@media (max-width:520px){
+  .page{padding-top:12px}
+  .headline{font-size:70px}
+  .wheel-shell{padding:11px}
+  .wheel-frame{padding:8px}
+  .pct{font-size:13px}
+  .name{font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <span class="firework fw1"></span><span class="firework fw2"></span>
+  <span class="firework fw3"></span><span class="firework fw4"></span>
+
+  <section class="hero">
+    <p class="eyebrow">룰렛을 돌리면</p>
+    <h1 class="headline"><span class="num">100%</span> <span class="win">당첨!</span></h1>
+  </section>
+
+  <section class="stage">
+    <div class="pointer"></div>
+    <div class="wheel-shell">
+      <div class="wheel-frame">
+        <svg id="wheelSvg" viewBox="0 0 400 400" aria-label="당첨 룰렛">
+<path d="M 200 200 L 200.00 10.00 A 190 190 0 0 1 348.55 81.54 Z" fill="#f8dfe2" class="sector"/>
+<g class="label" transform="translate(248.59 99.09)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">90%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">숙취환 1포</text></g>
+<path d="M 200 200 L 348.55 81.54 A 190 190 0 0 1 385.24 242.28 Z" fill="#f3d3d7" class="sector"/>
+<g class="label" transform="translate(309.19 175.08)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">4%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">숙취환 30포</text></g>
+<path d="M 200 200 L 385.24 242.28 A 190 190 0 0 1 282.44 371.18 Z" fill="#f8e2e4" class="sector"/>
+<g class="label" transform="translate(287.57 269.83)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">1%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">경옥고스틱</text></g>
+<path d="M 200 200 L 282.44 371.18 A 190 190 0 0 1 117.56 371.18 Z" fill="#f3d8dc" class="sector"/>
+<g class="label" transform="translate(200.00 312.00)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">2%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">경옥고10환</text></g>
+<path d="M 200 200 L 117.56 371.18 A 190 190 0 0 1 14.76 242.28 Z" fill="#f7e0e3" class="sector"/>
+<g class="label" transform="translate(112.43 269.83)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">1%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">청폐탕스틱10포</text></g>
+<path d="M 200 200 L 14.76 242.28 A 190 190 0 0 1 51.45 81.54 Z" fill="#f2d7db" class="sector"/>
+<g class="label" transform="translate(90.81 175.08)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">1%</text><text class="name" text-anchor="middle" y="15" style="font-size:11px">소청룡탕스틱 10포</text></g>
+<path d="M 200 200 L 51.45 81.54 A 190 190 0 0 1 200.00 10.00 Z" fill="#f6dfe2" class="sector"/>
+<g class="label" transform="translate(151.41 99.09)"><text class="pct" text-anchor="middle" y="-7" style="font-size:13px">1%</text><text class="name" text-anchor="middle" y="15" style="font-size:12px">쌍패탕스틱 10포</text></g>
+</svg>
+        <button class="center" id="startBtn" type="button">START</button>
+      </div>
+    </div>
+  </section>
+
+  <button class="cta" id="ctaBtn" type="button">룰렛 돌리기</button>
+
+  <section class="channel">
+    <div class="channel-pill"><span class="ch">Ch</span><strong>다린탕전원</strong><span style="font-size:22px">＋</span></div>
+    <div class="guide">카카오톡 채널에서 <b>“다린탕전원”</b> 검색 후 채널 추가하면</div>
+    <div class="event-box">1회 응모</div>
+  </section>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="card">
+    <div class="badge">축하합니다!</div>
+    <div class="title"></div>
+    <p class="prize" id="winPrize"></p>
+    <p class="sub">당첨 결과를 확인해 주세요.</p>
+    <button class="ok" id="okBtn" type="button">확인</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const prizes = [
+    {name:"숙취환 1포", weight:90},
+    {name:"숙취환 30포", weight:4},
+    {name:"경옥고스틱", weight:1},
+    {name:"경옥고10환", weight:2},
+    {name:"청폐탕스틱10포", weight:1},
+    {name:"소청룡탕스틱 10포", weight:1},
+    {name:"쌍패탕스틱 10포", weight:1}
+  ];
+
+  const svg = document.getElementById("wheelSvg");
+  const startBtn = document.getElementById("startBtn");
+  const ctaBtn = document.getElementById("ctaBtn");
+  const modal = document.getElementById("modal");
+  const okBtn = document.getElementById("okBtn");
+  const winPrize = document.getElementById("winPrize");
+
+  const totalWeight = prizes.reduce((sum, p) => sum + p.weight, 0);
+  let currentRotation = 0;
+  let spinning = false;
+
+  function weightedPick() {
+    let r = Math.random() * totalWeight;
+    for (let i = 0; i < prizes.length; i++) {
+      r -= prizes[i].weight;
+      if (r < 0) return i;
+    }
+    return prizes.length - 1;
+  }
+
+  function spin() {
+    if (spinning) return;
+    spinning = true;
+
+    const index = weightedPick();
+    // 5개의 표시 영역은 동일한 크기이며,
+    // 당첨 상품에 맞는 영역의 중앙이 12시 포인터 아래로 오도록 회전.
+    const sectorCenter = index * (360 / prizes.length) + (180 / prizes.length);
+    const currentMod = ((currentRotation % 360) + 360) % 360;
+    const correction = (360 - ((sectorCenter + currentMod) % 360)) % 360;
+    const turns = (5 + Math.floor(Math.random() * 3)) * 360;
+    currentRotation += turns + correction;
+
+    svg.style.transform = `rotate(${currentRotation}deg)`;
+
+    const end = () => {
+      svg.removeEventListener("transitionend", end);
+      spinning = false;
+      winPrize.textContent = prizes[index].name;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    };
+    svg.addEventListener("transitionend", end, {once:true});
+  }
+
+  startBtn.addEventListener("click", spin);
+  ctaBtn.addEventListener("click", spin);
+  okBtn.addEventListener("click", () => {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  });
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+  });
+})();
+</script>
+</body>
+</html>
